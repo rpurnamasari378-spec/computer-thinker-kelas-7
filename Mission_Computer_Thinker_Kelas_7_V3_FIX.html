@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission: Computer Thinker — Kelas 7</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#071b45,#173f8f 55%,#4c2a88);color:#17213a;min-height:100vh}
+.app{width:min(920px,94%);margin:auto;padding:18px 0 40px}
+.top{display:flex;justify-content:space-between;align-items:center;color:#fff;margin-bottom:14px;font-weight:900}
+.brand{display:flex;gap:9px;align-items:center}.logo{width:42px;height:42px;border-radius:14px;background:#fff;display:grid;place-items:center;font-size:22px}
+.panel{background:#ffffffef;border:1px solid #ffffff99;border-radius:26px;box-shadow:0 22px 60px #0005;padding:22px;margin-bottom:15px}
+.hero{text-align:center;position:relative;overflow:hidden;padding:28px 20px}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;opacity:.55}
+.hero:before{width:190px;height:190px;background:#d8f6ff;left:-90px;top:-80px}.hero:after{width:180px;height:180px;background:#eadcff;right:-80px;bottom:-90px}
+.hero>*{position:relative;z-index:1}.detective{font-size:62px}
+h1{font-size:clamp(34px,8vw,58px);line-height:.94;color:#173d9b;text-shadow:3px 4px #ffd43b;margin:10px 0}
+.lead{color:#5d6880;line-height:1.5}.tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.tag{padding:7px 11px;background:#eef4ff;color:#2454b5;border-radius:99px;font-size:12px;font-weight:800}
+label{display:block;font-weight:850;margin:12px 3px 7px}
+input,select{width:100%;padding:14px;border:2px solid #dbe2ef;border-radius:14px;font-size:16px;background:#fff}
+button{font:inherit;font-weight:850;border:0;border-radius:14px;cursor:pointer;padding:13px 17px}
+.primary{background:linear-gradient(135deg,#22cf79,#159b5a);color:#fff;box-shadow:0 5px 0 #087946;width:100%;margin-top:15px}
+.secondary{background:#edf2ff;color:#3159b9}.hidden{display:none!important}
+.stats{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:800}
+.pill{background:#f0f3f9;padding:8px 11px;border-radius:99px;font-size:13px}
+.progress{height:11px;background:#e9edf5;border-radius:99px;overflow:hidden;margin-top:12px}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#1769ff,#36d7ff);transition:.3s}
+.missionhead{display:flex;align-items:center;gap:12px}.missionicon{font-size:42px}
+.missiontitle{margin:0;font-size:23px}.subtitle{color:#6a7589;margin:4px 0 0}
+.question{font-size:21px;line-height:1.4;font-weight:900;margin:18px 0}
+.options{display:grid;gap:10px}.option{text-align:left;background:#fff;border:2px solid #e1e6ef;width:100%}
+.option:hover{border-color:#8ba7ff;background:#f7f9ff}
+.correct{border-color:#19a86b!important;background:#e9fff4!important;color:#086841}
+.wrong{border-color:#ed5471!important;background:#fff0f3!important;color:#a52644}
+.feedback{margin-top:14px;padding:14px;border-radius:14px;line-height:1.5}.good{background:#e9fff4;color:#086841}.bad{background:#fff0f3;color:#a52644}
+.nextrow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:15px}
+.result{text-align:center}.trophy{font-size:75px}.bigscore{font-size:60px;font-weight:1000;color:#1769ff}
+.badges{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:15px 0}.badge{background:#f1f4fa;border-radius:13px;padding:10px 12px;font-weight:850}
+@media(max-width:600px){.panel{padding:17px;border-radius:21px}.question{font-size:18px}.nextrow{flex-direction:column;align-items:stretch}.nextrow button{width:100%}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand"><div class="logo">🧠</div>COMPUTER THINKER</div><div>🎮 KELAS 7</div></div>
+
+<section id="home" class="panel hero">
+<div class="detective">🕵️‍♂️ 🧠</div>
+<h1>MISSION:<br>COMPUTER THINKER</h1>
+<p class="lead">Jadilah detektif berpikir! Pecahkan masalah dengan <b>dekomposisi, pengenalan pola, abstraksi,</b> dan <b>algoritma</b>.</p>
+<div class="tags"><span class="tag">🧩 5 Dekomposisi</span><span class="tag">🔎 5 Pola</span><span class="tag">🎯 5 Abstraksi</span><span class="tag">📋 5 Algoritma</span></div>
+<label>👤 Nama lengkap</label><input id="name" placeholder="Tulis nama lengkap...">
+<label>🏫 Kelas</label><select id="kelas"><option value="">Pilih kelas</option><option>7A</option><option>7B</option><option>7C</option><option>7D</option><option>7E</option><option>7F</option><option>7G</option><option>7H</option><option>7I</option><option>7J</option></select>
+<button class="primary" onclick="start()">🚀 MULAI MISI</button>
+</section>
+
+<section id="game" class="hidden">
+<div class="panel">
+<div class="stats"><span id="player">🕵️ Detektif</span><span class="pill">⭐ <span id="score">0</span> poin</span><span class="pill" id="count">Soal 1/20</span></div>
+<div class="progress"><div id="bar" class="bar"></div></div>
+</div>
+<div id="qcard" class="panel"></div>
+</section>
+
+<section id="result" class="panel result hidden">
+<div class="trophy">🏆</div><h2>MISI SELESAI!</h2><p id="resultName"></p>
+<div class="bigscore" id="final">0</div><p>poin</p><div id="badges" class="badges"></div>
+<p id="message"></p><button class="primary" onclick="location.reload()">🔄 MAIN LAGI</button>
+</section>
+</div>
+
+<script>
+const qs=[
+["🧩","Dekomposisi","Kamu diminta membuat acara ulang tahun kelas. Cara berpikir yang paling menunjukkan dekomposisi adalah...",["Langsung mengerjakan semuanya sekaligus","Membagi tugas menjadi tempat, makanan, undangan, dan acara","Memilih warna dekorasi terlebih dahulu","Menunggu teman mengerjakan semuanya"],1,"Dekomposisi berarti memecah masalah besar menjadi beberapa bagian yang lebih mudah ditangani."],
+["🧩","Dekomposisi","Sebuah aplikasi sekolah harus dibuat. Tim membagi pekerjaan menjadi desain, database, halaman login, dan pengujian. Ini merupakan...",["Abstraksi","Pengenalan pola","Dekomposisi","Pengacakan"],2,"Masalah besar dibagi menjadi bagian-bagian kecil agar dapat dikerjakan dengan lebih teratur."],
+["🧩","Dekomposisi","Saat ingin membersihkan rumah, langkah yang paling tepat adalah...",["Memikirkan seluruh rumah sebagai satu tugas","Membagi tugas menjadi kamar, dapur, halaman, dan ruang tamu","Tidak membuat rencana","Mengerjakan bagian secara acak"],1,"Membagi pekerjaan berdasarkan bagian rumah adalah contoh dekomposisi."],
+["🧩","Dekomposisi","Kelompokmu harus membuat presentasi tentang lingkungan. Pembagian tugas yang paling tepat adalah...",["Satu orang mengerjakan semua bagian","Membagi menjadi riset, gambar, isi slide, dan presentasi","Semua mencari informasi yang sama","Tidak membagi tugas"],1,"Proyek besar dapat dipecah menjadi beberapa sub-tugas yang jelas."],
+["🧩","Dekomposisi","Ketika memperbaiki sepeda yang bermasalah, memeriksa rem, rantai, ban, dan pedal satu per satu merupakan...",["Dekomposisi","Abstraksi","Pengenalan pola","Algoritma acak"],0,"Kita memecah masalah sepeda menjadi bagian-bagian kecil agar sumber masalah lebih mudah ditemukan."],
+["🔎","Pengenalan Pola","Perhatikan urutan: 2, 4, 6, 8, 10, ... Angka berikutnya adalah...",["11","12","13","14"],1,"Pola bertambah 2 setiap langkah."],
+["🔎","Pengenalan Pola","Setiap kali hujan deras, halaman sekolah menjadi tergenang. Kesimpulan yang paling tepat adalah...",["Ada pola antara hujan deras dan genangan","Hujan tidak berhubungan dengan genangan","Semua halaman pasti tergenang","Genangan hanya terjadi hari Senin"],0,"Pengenalan pola membantu menemukan hubungan atau kejadian yang berulang."],
+["🔎","Pengenalan Pola","Dalam beberapa soal, setelah membaca soal, membuat daftar informasi selalu membantu menyelesaikannya. Ini menunjukkan...",["Pola strategi yang efektif","Kesalahan algoritma","Abstraksi gambar","Dekomposisi perangkat"],0,"Strategi yang berulang dan terbukti membantu merupakan pola yang dapat digunakan kembali."],
+["🔎","Pengenalan Pola","Perhatikan pola: ▲ ● ▲ ● ▲ ● ... Bentuk berikutnya adalah...",["▲","●","■","◆"],0,"Polanya bergantian antara segitiga dan lingkaran."],
+["🔎","Pengenalan Pola","Setiap pagi setelah bel masuk, siswa langsung menuju kelas. Kejadian yang berulang ini dapat membantu kita...",["Menemukan pola kebiasaan","Menghapus semua aturan","Membuat data acak","Mengabaikan kejadian"],0,"Pengulangan kejadian dapat menunjukkan pola yang bisa dikenali."],
+["🎯","Abstraksi","Saat membuat peta sederhana menuju sekolah, informasi mana yang paling penting?",["Warna sepatu orang di jalan","Nama semua orang yang lewat","Jalan, persimpangan, dan lokasi sekolah","Merek kendaraan yang lewat"],2,"Abstraksi berarti mengambil informasi penting untuk tujuan tertentu dan mengabaikan detail yang tidak diperlukan."],
+["🎯","Abstraksi","Untuk mencatat data siswa yang akan mengikuti lomba, informasi yang paling relevan adalah...",["Warna tas setiap siswa","Nama, kelas, dan jenis lomba","Merek HP siswa","Makanan favorit siswa"],1,"Informasi dipilih sesuai tujuan. Detail yang tidak berkaitan tidak perlu dimasukkan."],
+["🎯","Abstraksi","Sebuah ikon tempat sampah pada komputer tidak menggambar tempat sampah secara sangat detail. Tujuannya agar...",["Ikon terlihat rumit","Informasi utama mudah dikenali","File menjadi lebih besar","Komputer bekerja lebih lambat"],1,"Ikon menggunakan representasi sederhana agar fungsi atau maknanya cepat dipahami."],
+["🎯","Abstraksi","Saat membuat daftar barang untuk piknik, informasi yang paling penting adalah...",["Warna rambut semua peserta","Barang yang harus dibawa dan jumlahnya","Merek sepatu peserta","Nama semua tetangga"],1,"Abstraksi memilih informasi yang benar-benar dibutuhkan untuk tujuan."],
+["🎯","Abstraksi","Kamu ingin menjelaskan cara menuju perpustakaan kepada teman. Detail mana yang boleh diabaikan?",["Arah belok penting","Nama jalan utama","Warna baju orang yang lewat","Lokasi perpustakaan"],2,"Detail yang tidak membantu mencapai tujuan dapat diabaikan."],
+["📋","Algoritma","Urutan yang paling tepat untuk membuat teh manis adalah...",["Minum → masukkan gula → rebus air → masukkan teh","Rebus air → masukkan teh → tambahkan gula → aduk","Aduk → minum → rebus air → masukkan teh","Masukkan gula → minum → rebus air → aduk"],1,"Algoritma adalah langkah-langkah yang tersusun secara logis untuk mencapai tujuan."],
+["📋","Algoritma","Mengapa langkah dalam algoritma harus disusun berurutan?",["Agar terlihat panjang","Agar komputer selalu berbunyi","Agar tujuan dapat dicapai dengan benar","Agar langkah menjadi lebih sulit"],2,"Urutan yang tepat memastikan setiap langkah dilakukan pada waktu yang sesuai."],
+["📋","Algoritma","Kamu ingin mencari buku tertentu di rak. Algoritma yang paling masuk akal adalah...",["Mengambil semua buku tanpa melihat judul","Mencari berdasarkan judul/kategori sampai buku ditemukan","Menutup mata lalu mengambil satu buku","Memindahkan rak tanpa alasan"],1,"Algoritma pencarian menggunakan langkah yang sistematis agar objek yang dicari dapat ditemukan."],
+["📋","Algoritma","Untuk mengirim tugas melalui platform belajar, urutan yang paling masuk akal adalah...",["Upload file → login → pilih kelas → kirim","Login → pilih kelas/tugas → upload file → periksa → kirim","Kirim → upload → login","Buka tugas → matikan internet → kirim"],1,"Langkah yang berurutan membuat proses lebih terarah dan mengurangi kesalahan."],
+["📋","Algoritma","Saat membuat mie instan, langkah yang tidak tepat jika dilakukan paling awal adalah...",["Merebus air","Menyiapkan bumbu","Memasukkan mie setelah air mendidih","Makan mie sebelum dimasak"],3,"Algoritma harus logis: mie perlu dimasak sebelum dimakan."]
+];
+let i=0,score=0,locked=false;
+
+function start(){
+ const n=document.getElementById('name').value.trim(),k=document.getElementById('kelas').value;
+ if(!n||!k){alert('Isi nama lengkap dan pilih kelas dulu ya 😊');return}
+ document.getElementById('home').classList.add('hidden');
+ document.getElementById('game').classList.remove('hidden');
+ document.getElementById('player').textContent='🕵️ '+n+' • '+k;
+ i=0;score=0;showQ();
+}
+function showQ(){
+ locked=false;
+ const x=qs[i],m=x[0],title=x[1],q=x[2],ops=x[3];
+ document.getElementById('score').textContent=score;
+ document.getElementById('count').textContent='Soal '+(i+1)+'/20';
+ document.getElementById('bar').style.width=((i+1)/20*100)+'%';
+ document.getElementById('qcard').innerHTML=
+ '<div class="missionhead"><div class="missionicon">'+m+'</div><div><h2 class="missiontitle">'+title+'</h2><p class="subtitle">Misi '+(Math.floor(i/5)+1)+' • Tantangan '+((i%5)+1)+'</p></div></div>'+
+ '<div class="question">'+q+'</div><div class="options">'+
+ ops.map((o,j)=>'<button class="option" onclick="answer('+j+')">'+String.fromCharCode(65+j)+'. '+o+'</button>').join('')+
+ '</div><div id="fb"></div>';
+}
+function answer(n){
+ if(locked)return;locked=true;
+ const x=qs[i],a=x[4],btn=[...document.querySelectorAll('.option')];
+ btn[a].classList.add('correct');
+ const ok=n===a;
+ if(!ok)btn[n].classList.add('wrong');
+ if(ok)score+=20;
+ document.getElementById('score').textContent=score;
+ document.getElementById('fb').innerHTML=
+ '<div class="feedback '+(ok?'good':'bad')+'">'+
+ (ok?'🎉 <b>Benar! +20 poin</b>':'💡 <b>Belum tepat.</b>')+
+ '<br>'+x[5]+'</div>'+
+ '<div class="nextrow"><span class="pill">'+(ok?'⭐ Jawaban tepat!':'📚 Belajar dari penjelasan ini!')+
+ '</span><button class="'+(ok?'primary':'secondary')+'" onclick="next()">'+
+ (i===19?'🏆 LIHAT HASIL':'Lanjut ➜')+'</button></div>';
+}
+function next(){
+ i++;
+ if(i<qs.length)showQ();else finish();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function finish(){
+ document.getElementById('game').classList.add('hidden');
+ document.getElementById('result').classList.remove('hidden');
+ document.getElementById('final').textContent=score;
+ const n=document.getElementById('name').value.trim();
+ document.getElementById('resultName').innerHTML='Hebat, <b>'+n+'</b>!';
+ let badges=score>=360?['🏆 MASTER THINKER','🧠 LOGIC HERO','⚡ SUPER SOLVER']:
+ score>=280?['🥇 THINKER PRO','🧩 PROBLEM SOLVER']:
+ score>=200?['🥈 THINKER','🔎 PATTERN FINDER']:['🌱 THINKER PEMULA'];
+ document.getElementById('badges').innerHTML=badges.map(b=>'<span class="badge">'+b+'</span>').join('');
+ document.getElementById('message').textContent=score>=360?'Luar biasa! Cara berpikirmu sangat terstruktur.':
+ score>=280?'Sangat bagus! Kamu sudah memahami konsep utama.':
+ score>=200?'Bagus! Terus latihan agar semakin tajam.':
+ 'Jangan menyerah. Coba lagi dan perhatikan penjelasan setiap soal.';
+}
+</script>
+</body>
+</html>
