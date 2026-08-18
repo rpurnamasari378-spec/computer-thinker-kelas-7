@@ -1,2 +1,2 @@
-# computer-thinker-kelas-7
+index.html
 Game Informatika Kelas 7 - Computational Thinking
